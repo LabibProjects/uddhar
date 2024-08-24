@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # CSRF ORIGINS
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "https://tiy-efgkjrw6xd.miahtrip.com",
 ]
 # CORS Settings
 CORS_ALLOW_ALL_ORIGINS = True
