@@ -44,7 +44,9 @@ class AffectedRequest(models.Model):
     )
     # food, water, shelter, medical help, array of these
     images = ArrayField(models.URLField(), blank=True, null=True)
-    category = ArrayField(models.CharField(max_length=200))
+    category = ArrayField(
+        models.CharField(max_length=200, choices=CATEGORY), blank=True
+    )
     number_of_people = models.IntegerField(default=0)
     description = models.CharField(max_length=500, blank=True, null=True)
     requested_on = models.DateTimeField(auto_now_add=True)
@@ -62,7 +64,9 @@ class AffectedRequest(models.Model):
         ("completed", "Completed"),
         ("rejected", "Rejected"),
     )
-    status = models.CharField(max_length=200, default="pending")
+    status = models.CharField(
+        max_length=20, choices=STATUS, default="pending", blank=True, null=True
+    )
     rescuer_positions = JSONField(default=list, blank=True)
     rescuer_descriptions = ArrayField(
         models.CharField(max_length=200), default=list, blank=True

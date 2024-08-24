@@ -27,8 +27,14 @@ class AffectedRequestView(APIView):
         return Response(serializer.errors)
 
     def get(self, request, format=None, *args, **kwargs):
+        if request.GET.get("all") == "true":
+            requests = AffectedRequest.objects.all().order_by("-requested_on")
+            serializer = self.serializer_class(requests, many=True)
+            return Response(serializer.data)
+
         if request.user and request.user.is_authenticated and request.user.is_affected:
             requests = AffectedRequest.objects.filter(user=request.user.affected_user)
             serializer = self.serializer_class(requests, many=True)
             return Response(serializer.data)
+
         return Response({"error": "User has to be logged in to view requests."})

@@ -10,7 +10,25 @@ class RescuerUser(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     address = models.CharField(max_length=400, blank=True, null=True)
     contact_number = models.CharField(max_length=200, blank=True, null=True)
-    category = ArrayField(models.CharField(max_length=200), blank=True, null=True)
+    CATEGORY = (
+        ("food", "Food"),
+        ("water", "Water"),
+        ("shelter", "Shelter"),
+        ("medical_help", "Medical Help"),
+        ("boat", "Boat"),
+        ("helicopter", "Helicopter"),
+        ("speed_boat", "Speed Boat"),
+    )
+    category = ArrayField(
+        models.CharField(
+            max_length=200,
+            choices=CATEGORY,
+        ),
+        blank=True,
+        null=True,
+    )
+    # category = ArrayField(models.CharField(max_length=200), blank=True, null=True)
+    blood_group = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -64,5 +64,5 @@ urlpatterns = [
     # path("administrator/", include("administrator.urls")),
     path("rescuer/", include("rescuer.urls")),
     path("affected/", include("affected.urls")),
-    # path("health_shelter/", include("health_shelter.urls")),
+    path("health_shelter/", include("health_shelter.urls")),
 ]

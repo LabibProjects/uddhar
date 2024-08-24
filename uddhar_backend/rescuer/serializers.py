@@ -8,12 +8,13 @@ class RescuerUserRegistrationSerializer(RegisterSerializer):
     user = serializers.PrimaryKeyRelatedField(
         read_only=True,
     )
-    name = serializers.CharField(max_length=200, required=False)
-    address = serializers.CharField(max_length=400, required=False)
-    contact_number = serializers.CharField(max_length=200, required=False)
+    name = serializers.CharField(max_length=200, required=True)
+    address = serializers.CharField(max_length=400, required=True)
+    contact_number = serializers.CharField(max_length=200, required=True)
     category = serializers.ListField(
         child=serializers.CharField(max_length=200), required=False
     )
+    blood_group = serializers.CharField(max_length=200, required=False)
 
     def get_cleaned_data(self):
         data = super(RescuerUserRegistrationSerializer, self).get_cleaned_data()
@@ -22,6 +23,7 @@ class RescuerUserRegistrationSerializer(RegisterSerializer):
             "address": self.validated_data.get("address", ""),
             "contact_number": self.validated_data.get("contact_number", ""),
             "category": self.validated_data.get("category", []),
+            "blood_group": self.validated_data.get("blood_group", ""),
         }
         data.update(extra_data)
         return data
@@ -37,6 +39,7 @@ class RescuerUserRegistrationSerializer(RegisterSerializer):
             address=self.validated_data.get("address", ""),
             contact_number=self.validated_data.get("contact_number", ""),
             category=self.validated_data.get("category", []),
+            blood_group=self.validated_data.get("blood_group", ""),
         )
         rescuer.save()
         return user
