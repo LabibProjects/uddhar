@@ -18,8 +18,7 @@ def create_consumer_profile(request, user, **kwargs):
     sociallogin = kwargs.get("sociallogin")
     if sociallogin and sociallogin.account.provider == "google":
         # Extract the first_name from user data
-        name = sociallogin.account.extra_data.get("name", "")
-        print(name)
+        name = sociallogin.account.extra_data.get("name", "")        
         # Create an AffectedUser object
         AffectedUser.objects.create(user=user, name=name)
         user.is_affected = True

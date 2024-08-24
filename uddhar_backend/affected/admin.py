@@ -1,59 +1,58 @@
 from django.contrib import admin
-from affected.models import AffectedRequest
+from affected.models import AffectedRequest, AffectedUser
+
+
+@admin.register(AffectedUser)
+class AffectedUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "name",
+        "address",
+        "latitude",
+        "longitude",
+        "contact_number",
+        "alternative_contact_number",
+        "blood_group",
+    )
 
 
 @admin.register(AffectedRequest)
 class AffectedRequestAdmin(admin.ModelAdmin):
     list_display = (
         "user",
-        "status",
+        "rescuer_user",
         "category",
         "number_of_people",
+        "description",
         "requested_on",
         "latitude",
         "longitude",
         "contact_number",
         "alternative_contact_number",
+        "name",
+        "status",
+        "rescuer_positions",
+        "rescuer_descriptions",
+        "rescue_updated_times",
+        "rescue_active_from",
     )
-    list_filter = ("status",)
+    list_display_links = ("user", "rescuer_user")
     search_fields = (
-        "user__name",
-        "user__address",
+        "user",
+        "rescuer_user",
+        "category",
+        "number_of_people",
+        "description",
+        "requested_on",
+        "latitude",
+        "longitude",
         "contact_number",
         "alternative_contact_number",
+        "name",
+        "status",
+        "rescuer_positions",
+        "rescuer_descriptions",
+        "rescue_updated_times",
+        "rescue_active_from",
     )
-    ordering = ("-requested_on",)
-    date_hierarchy = "requested_on"
-    list_per_page = 20
-    list_editable = ("status",)
-    list_display_links = ("user",)
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "user",
-                    "status",
-                    "category",
-                    "number_of_people",
-                    "requested_on",
-                    "latitude",
-                    "longitude",
-                    "contact_number",
-                    "alternative_contact_number",
-                )
-            },
-        ),
-    )
-    readonly_fields = ("requested_on",)
-    actions = ["mark_as_pending", "mark_as_completed"]
-
-    def mark_as_pending(self, request, queryset):
-        queryset.update(status="pending")
-
-    mark_as_pending.short_description = "Mark selected requests as pending"
-
-    def mark_as_completed(self, request, queryset):
-        queryset.update(status="completed")
-
-    mark_as_completed.short_description = "Mark selected requests as completed"
+    list_per_page = 25

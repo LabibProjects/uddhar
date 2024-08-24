@@ -12,4 +12,10 @@ class AffectedUserProfile(serializers.ModelSerializer):
 class AffectedRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = AffectedRequest
-        fields = "__all__"
+        exclude = (
+            "status",
+            "rescuer_positions",
+            "rescuer_descriptions",
+            "rescue_updated_times",
+            "rescue_active_from",
+        )

@@ -3,9 +3,11 @@ from django.urls import path, include, re_path
 from rest_framework_simplejwt.views import TokenRefreshView
 from dj_rest_auth.registration.views import VerifyEmailView
 from rest_framework_simplejwt.views import TokenVerifyView
-from administrator.views import GoogleLoginView
+from administrator.views import GoogleLoginView, CustomTokenObtainPairSerializer
 from dj_rest_auth.views import PasswordResetConfirmView, PasswordResetView
 from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 # # --------------- Google Login ---------------
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -26,6 +28,11 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 urlpatterns = [
     path("admin/", admin.site.urls),
     # ---------- Auth ------------
+    path(
+        "rest-auth/login/",
+        TokenObtainPairView.as_view(serializer_class=CustomTokenObtainPairSerializer),
+        name="token_obtain_pair",
+    ),
     path("rest-auth/", include("dj_rest_auth.urls")),
     path(
         "rest-auth/registration/account-confirm-email/",
@@ -55,6 +62,7 @@ urlpatterns = [
     path("api/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     # ---------- Apps ------------
     # path("administrator/", include("administrator.urls")),
+    path("rescuer/", include("rescuer.urls")),
     path("affected/", include("affected.urls")),
     # path("health_shelter/", include("health_shelter.urls")),
 ]
