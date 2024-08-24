@@ -54,7 +54,7 @@ urlpatterns = [
     path("get-access-token/", TokenRefreshView.as_view(), name="get-access-token"),
     path("api/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     # ---------- Apps ------------
-    path("administrator/", include("administrator.urls")),
+    # path("administrator/", include("administrator.urls")),
     path("affected/", include("affected.urls")),
-    path("health_shelter/", include("health_shelter.urls")),
+    # path("health_shelter/", include("health_shelter.urls")),
 ]

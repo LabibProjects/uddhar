@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -218,7 +219,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_ADAPTER = "all_auth_extended.all_auth_extended.AccountAdapter"
-AUTH_USER_MODEL = "userAPI.User"
+AUTH_USER_MODEL = "administrator.User"
 
 SITE_ID = 1
 
