@@ -6,6 +6,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import User
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 # Login With Google
@@ -13,6 +14,13 @@ class GoogleLoginView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     callback_url = "postmessage"
     client_class = OAuth2Client
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        token = RefreshToken.for_user(request.user)
+        response.data["access"] = str(token.access_token)
+        response.data["refresh"] = str(token)
+        return response
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
