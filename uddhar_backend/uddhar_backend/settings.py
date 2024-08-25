@@ -34,6 +34,10 @@ CSRF_TRUSTED_ORIGINS = [
     "https://tiy-efgkjrw6xd.miahtrip.com",
 ]
 # CORS Settings
+CORS_ALLOWED_ORIGINS = [
+    "https://uddharbd.org" "http://localhost:3000",
+    "https://tiy-efgkjrw6xd.miahtrip.com",
+]
 CORS_ALLOW_ALL_ORIGINS = True
 
 
