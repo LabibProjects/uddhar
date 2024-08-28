@@ -17,7 +17,11 @@ class HealthShelterRegistrationView(RegisterView):
 class HealthShelterPostView(APIView):
     def post(self, request):
         # check logged in user
-        if request.user and request.user.is_authenticated and request.user.is_health_shelter:
+        if (
+            request.user
+            and request.user.is_authenticated
+            and request.user.is_health_shelter
+        ):
             serializer = HealthShelterPostSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save(user=request.user.health_shelter_user)
@@ -47,7 +51,11 @@ class HealthShelterPostView(APIView):
             serializer = HealthShelterPostSerializer(posts, many=True)
             return Response(serializer.data)
 
-        if request.user and request.user.is_authenticated and request.user.is_health_shelter:
+        if (
+            request.user
+            and request.user.is_authenticated
+            and request.user.is_health_shelter
+        ):
             posts = HealthShelterPost.objects.filter(
                 user=request.user.health_shelter_user
             )

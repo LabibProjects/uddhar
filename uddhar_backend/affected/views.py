@@ -87,3 +87,18 @@ class AffectedRequestView(APIView):
             return Response(serializer.data)
 
         return Response({"error": "User has to be logged in to view requests."})
+
+
+class getCount(APIView):
+    def get(self, request):
+        count = AffectedUser.objects.all().count()
+        help_seeked = AffectedRequest.objects.all().count()
+        helped = AffectedRequest.objects.filter(status="completed").count()
+
+        return Response(
+            {
+                "help_seeked": help_seeked,
+                "helped": helped,
+                "total_user": count,
+            }
+        )
