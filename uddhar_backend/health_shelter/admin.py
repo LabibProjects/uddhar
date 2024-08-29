@@ -1,5 +1,20 @@
 from django.contrib import admin
-from .models import HealthShelterPost
+from .models import HealthShelterPost, HealthShelterUser
+
+
+@admin.register(HealthShelterUser)
+class HealthShelterUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "address",
+        "latitude",
+        "longitude",
+        "contact_number",
+        "alternative_contact_number",
+    )
+    search_fields = ("name", "address")
+    ordering = ("name",)
+    readonly_fields = ("user",)
 
 
 @admin.register(HealthShelterPost)
