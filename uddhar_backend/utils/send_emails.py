@@ -71,8 +71,8 @@ def notify(affected):
     email_list.add("sktanim5800@gmail.com")
     email_list.add("nmuatasin2005@gmail.com")
     email_list.add("bayajidalam2001@gmail.com")
-    email_list.add("twashinilahi231@gmail.com")
-    email_list.add("tofaal91522@gmail.com")
+    email_list.add("twashinilahi231@gmail.com")    
+    email_list.add("nazmusraj@gmail.com")
 
     send_html_mail(
         subject="Uddhar Notification",
