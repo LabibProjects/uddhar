@@ -12,14 +12,16 @@
       <span style="font-weight: bold"> Help needed: </span>
       {% for category1 in affected.category %} {{ category1 }}  {% endfor %}
       <br>
-      <span style="font-weight: bold"> Description: </span> {{ affected.description }}
+      <span style="font-weight: bold"> Description: </span>
+      <br>
+      {{ affected.description }}
       <br>
       <span style="font-weight: bold"> Contact No: </span> {{ affected.contact_number }}
       <br>
       <span style="font-weight: bold"> Alternative Contact No: </span> {{ affected.alternative_contact_number }}
       <br>
       <span style="font-weight: bold"> Requested from: </span> 
-      <a href="{{ affected.latitude }}{{ affected.longitude }}">
+      <a href="https://maps.google.com/?q={{ affected.latitude }},{{ affected.longitude }}">
         Map Link
       </a>
       
