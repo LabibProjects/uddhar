@@ -3,9 +3,9 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from uddhar_backend.settings import EMAIL_HOST_USER
 from rescuer.models import RescuerUser
-from weasyprint import HTML
-import json
-import datetime
+# from weasyprint import HTML
+# import json
+# import datetime
 
 
 # from weasyprint import HTML
@@ -36,10 +36,10 @@ class EmailThread(threading.Thread):
                     )
 
         # Attaching PDFs
-        if self.pdfs is not None:
-            for pdf in self.pdfs:
-                pdf_data = HTML(string=pdf["content"]).write_pdf()
-                msg.attach(pdf["name"], pdf_data, "application/pdf")
+        # if self.pdfs is not None:
+        #     for pdf in self.pdfs:
+        #         pdf_data = HTML(string=pdf["content"]).write_pdf()
+        #         msg.attach(pdf["name"], pdf_data, "application/pdf")
 
         msg.content_subtype = "html"
         msg.body = self.html_content
