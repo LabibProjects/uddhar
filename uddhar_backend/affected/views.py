@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from utils.send_emails import notify
 
 # serializers
 from affected.serializers import AffectedRequestSerializer
@@ -68,8 +69,13 @@ class AffectedRequestView(APIView):
                 and request.user.is_authenticated
                 and request.user.is_affected
             ):
-                serializer.save(user=request.user.affected_user)
-            serializer.save()
+                affected_instance = serializer.save(user=request.user.affected_user)
+
+            affected_instance = serializer.save()
+
+            # send email
+            notify(affected=affected_instance)
+
             return Response(
                 {"status": "Request created successfully.", "data": serializer.data}
             )
