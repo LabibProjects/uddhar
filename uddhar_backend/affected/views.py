@@ -79,7 +79,7 @@ class AffectedRequestView(APIView):
             return Response(
                 {"status": "Request created successfully.", "data": serializer.data}
             )
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=500)
 
     def get(self, request, format=None, *args, **kwargs):
         if request.GET.get("all") == "true":
